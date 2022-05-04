@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import Header from "./components/Header/Header";
+import { Route, Routes } from "react-router-dom";
+
+import Blog from "./components/Blog/Blog";
+import Sign from "./components/SignIn/SignIn";
+import SignIn from "./components/SignIn/SignIn";
+import AboutUs from "./components/AboutUs/AboutUs";
+
+import Home from "./components/Home/Home/Home/Home";
+import InventoryDetail from "./components/InventoryDetail/InventoryDetail/InventoryDetail";
+import ManageInventory from "./components/ManageInventroy/ManageInventory/ManageInventory";
+import AddNewItem from "./components/AddNewItem/AddNewItem";
+import Inventory from "./components/Home/Home/Inventory/Inventory";
+import SignUp from "./components/SignUp/SignUp";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header></Header>
+      <Routes>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
+
+        <Route
+          path="/inventory/:id"
+          element={<InventoryDetail></InventoryDetail>}
+        ></Route>
+        <Route
+          path="/manageinventory"
+          element={<ManageInventory></ManageInventory>}
+        ></Route>
+        <Route path="/addnewitem" element={<AddNewItem></AddNewItem>}></Route>
+
+        <Route path="/blog" element={<Blog></Blog>}></Route>
+        <Route path="/aboutus" element={<AboutUs></AboutUs>}></Route>
+        <Route path="/signin" element={<SignIn></SignIn>}></Route>
+        <Route path="/signup" element={<SignUp></SignUp>}></Route>
+        <Route path="*" element={<NotFound></NotFound>}></Route>
+      </Routes>
     </div>
   );
 }
