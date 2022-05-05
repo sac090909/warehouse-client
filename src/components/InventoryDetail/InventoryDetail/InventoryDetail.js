@@ -7,7 +7,7 @@ import RestockInventory from "../RestockInventory/RestockInventory";
 
 const InventoryDetail = () => {
   const { id } = useParams();
-  let [inventory, setInventory] = useInventoryDetail(id);
+  const [inventory, setInventory] = useInventoryDetail(id);
 
   const {
     name,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import pic1 from "../../images/logo-2.png";
@@ -8,9 +8,11 @@ import auth from "../../firebase.init";
 
 const Header = () => {
   const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
 
   const handleSignOut = () => {
     signOut(auth);
+    navigate("/");
   };
 
   return (
@@ -35,9 +37,19 @@ const Header = () => {
               <Nav.Link as={Link} to="/somethingHome2" href="#somethingHome2">
                 SomethingHome2
               </Nav.Link>
-              <Nav.Link as={Link} to="manageinventory" href="#manageinventory">
-                Manage Inventories
-              </Nav.Link>
+
+              {user ? (
+                <Nav.Link
+                  as={Link}
+                  to="manageinventory"
+                  href="#manageinventory"
+                >
+                  Manage Inventories
+                </Nav.Link>
+              ) : (
+                ""
+              )}
+
               <Nav.Link as={Link} to="blog" href="#blog">
                 Blog
               </Nav.Link>
@@ -57,9 +69,11 @@ const Header = () => {
                 </Nav.Link>
               )}
 
-              <Nav.Link eventKey={2} href="#register">
-                Register
-              </Nav.Link>
+              {!user && (
+                <Nav.Link as={Link} to="/signup" eventKey={2} href="#signup">
+                  Sign Up
+                </Nav.Link>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

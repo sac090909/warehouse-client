@@ -15,6 +15,7 @@ import AddNewItem from "./components/AddNewItem/AddNewItem";
 import Inventory from "./components/Home/Home/Inventory/Inventory";
 import SignUp from "./components/SignUp/SignUp";
 import NotFound from "./components/NotFound/NotFound";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 function App() {
   return (
@@ -26,7 +27,11 @@ function App() {
 
         <Route
           path="/inventory/:id"
-          element={<InventoryDetail></InventoryDetail>}
+          element={
+            <RequireAuth>
+              <InventoryDetail></InventoryDetail>
+            </RequireAuth>
+          }
         ></Route>
         <Route
           path="/manageinventory"

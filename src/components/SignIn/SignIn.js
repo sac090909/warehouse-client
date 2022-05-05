@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../images/GLogo.svg";
 import {
   useAuthState,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import Loading from "../Loading/Loading";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-  const navigate = useNavigate();
+  const [signInWithaGoogle, user2, loading2, error2] =
+    useSignInWithGoogle(auth);
   const [user1, loading1, error1] = useAuthState(auth);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
@@ -28,9 +34,12 @@ const SignIn = () => {
     signInWithEmailAndPassword(email, password);
     console.log(email, password);
   };
-
+  if (loading1) {
+    return <Loading></Loading>;
+  }
   if (user1) {
-    navigate("/");
+    // navigate("/");
+    navigate(from, { replace: true });
   }
 
   return (
@@ -70,7 +79,10 @@ const SignIn = () => {
       <div className="mx-auto d-block text-center border w-50 rounded shadow-sm">
         <div className="mb-2 p-3">
           {" "}
-          <button className="btn w-100 border">
+          <button
+            onClick={() => signInWithaGoogle()}
+            className="btn w-100 border"
+          >
             Sign in with <img src={logo} alt="" />
             oogle
           </button>
