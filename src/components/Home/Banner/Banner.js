@@ -5,7 +5,7 @@ const Banner = () => {
   return (
     <div>
       <img
-        className="my-5 rounded mx-auto d-block img-fluid px-5"
+        className="my-5 rounded mx-auto d-block img-fluid shadow-sm img-thumbnail"
         src={pic}
         alt=""
       />

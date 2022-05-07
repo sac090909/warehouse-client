@@ -20,7 +20,7 @@ const Header = () => {
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="border-bottom border-secondary border-2"
+        className="border-bottom border-secondary border-2 shadow-sm"
         bg="white"
         variant="light"
       >

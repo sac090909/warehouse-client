@@ -32,14 +32,9 @@ const InventoryDetail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("success", data);
-        //window.location.reload(false);
+        // console.log("success", data);
       });
   };
-
-  //   const handleCounter = () => {
-  //     setCounter(counter + 1);
-  //   };
 
   return (
     <div>
