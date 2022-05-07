@@ -6,6 +6,7 @@ import {
   useCreateUserWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import logo from "../../images/GLogo.svg";
+import Loading from "../Loading/Loading";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -31,6 +32,10 @@ const SignUp = () => {
 
   if (user1) {
     navigate("/");
+  }
+
+  if (loading1) {
+    return <Loading></Loading>;
   }
 
   return (

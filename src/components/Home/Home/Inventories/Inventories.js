@@ -10,7 +10,7 @@ const Inventories = () => {
     <div>
       <h3 className="text-center my-5">Our Inventory </h3>
       <div className="row row-cols-1 row-cols-md-3 g-4 mx-auto px-5">
-        {inventories.slice(0, 6).map((inventory) => (
+        {inventories?.slice(0, 6).map((inventory) => (
           <Inventory key={inventory._id} inventory={inventory}></Inventory>
         ))}
       </div>

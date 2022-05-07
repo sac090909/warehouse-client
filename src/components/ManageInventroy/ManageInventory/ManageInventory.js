@@ -3,14 +3,15 @@ import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Inventory from "../../Home/Home/Inventory/Inventory";
 import useInventories from "../../hooks/userInventories";
+import AddItem from "../AddItem/AddItem";
 import ManageInventoryAll from "../ManageInventoryAll/ManageInventoryAll";
 
 const ManageInventory = () => {
   const [inventories, setInventories] = useInventories();
 
   const handleDeleteItem = (id) => {
-    const removeConfirm = window.confirm("Are you sure to remove?");
-    if (removeConfirm) {
+    const deleteConfirm = window.confirm("Are you sure to delete?");
+    if (deleteConfirm) {
       fetch(`http://localhost:4001/inventory/${id}`, {
         method: "DELETE",
       })
@@ -56,12 +57,7 @@ const ManageInventory = () => {
           </tbody>
         </Table>
       </div>
-      <Link
-        className=" text-dark text-decoration-none text-center d-block "
-        to="/addnewitem"
-      >
-        <button className=" my-5 rounded w-25">Add New Item</button>
-      </Link>
+      <AddItem></AddItem>
     </div>
   );
 };

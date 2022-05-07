@@ -7,7 +7,7 @@ import RestockInventory from "../RestockInventory/RestockInventory";
 
 const InventoryDetail = () => {
   const { id } = useParams();
-  const [inventory, setInventory] = useInventoryDetail(id);
+  let [inventory, setInventory] = useInventoryDetail(id);
 
   const {
     name,
@@ -21,7 +21,7 @@ const InventoryDetail = () => {
   } = inventory;
 
   const handleDelivered = (id) => {
-    const quantity = inventory.quantity - 1;
+    const quantity = parseInt(inventory.quantity) - 1;
     const updatedQuantity = { quantity };
     fetch(`http://localhost:4001/inventory/${id}`, {
       method: "PUT",
@@ -33,7 +33,7 @@ const InventoryDetail = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("success", data);
-        window.location.reload(false);
+        //window.location.reload(false);
       });
   };
 

@@ -20,7 +20,7 @@ const Header = () => {
       <Navbar
         collapseOnSelect
         expand="lg"
-        className="border-bottom border-secondary border-1"
+        className="border-bottom border-secondary border-2"
         bg="white"
         variant="light"
       >
@@ -38,16 +38,19 @@ const Header = () => {
                 SomethingHome2
               </Nav.Link>
 
-              {user ? (
+              {user && (
                 <Nav.Link
                   as={Link}
                   to="manageinventory"
                   href="#manageinventory"
                 >
-                  Manage Inventories
+                  Manage Items
                 </Nav.Link>
-              ) : (
-                ""
+              )}
+              {user && (
+                <Nav.Link as={Link} to="/addnewitem" href="#addnewitem">
+                  Add Item
+                </Nav.Link>
               )}
 
               <Nav.Link as={Link} to="blog" href="#blog">

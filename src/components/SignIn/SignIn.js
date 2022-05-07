@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../images/GLogo.svg";
+import alternative from "../../images/alternative.png";
 import {
   useAuthState,
   useSignInWithEmailAndPassword,
@@ -33,21 +34,27 @@ const SignIn = () => {
     event.preventDefault();
     signInWithEmailAndPassword(email, password);
     console.log(email, password);
+    console.log(error, error1);
   };
   if (loading1) {
     return <Loading></Loading>;
+  }
+  let signInErrorElement;
+  if (error || error2) {
+    signInErrorElement = (
+      <p className="text-danger text-center">
+        {" "}
+        {error?.message} {error2?.message}
+      </p>
+    );
   }
   if (user1) {
     // navigate("/");
     navigate(from, { replace: true });
   }
-
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        className="w-50 mx-auto d-block my-5 border p-5 rounded-4 shadow-sm bg-body "
-      >
+    <div className="w-50 mx-auto d-block my-5 border p-5 rounded-4 shadow-sm bg-body ">
+      <form onSubmit={handleSubmit}>
         <h4 className="text-center text-secondary">Sign In</h4>
 
         <div className="mb-3">
@@ -76,9 +83,15 @@ const SignIn = () => {
           Submit
         </button>
       </form>
-      <div className="mx-auto d-block text-center border w-50 rounded shadow-sm">
-        <div className="mb-2 p-3">
-          {" "}
+      {/* <img
+        style={{ width: "50px" }}
+        className="image-fluid"
+        src={alternative}
+        alt=""
+      /> */}
+      <p className="text-center my-3 text-secondary">OR</p>
+      <div>
+        <div className="p-3">
           <button
             onClick={() => signInWithaGoogle()}
             className="btn w-100 border"
@@ -87,7 +100,8 @@ const SignIn = () => {
             oogle
           </button>
         </div>
-        <p>
+        {signInErrorElement}
+        <p className="text-center">
           New User ?
           <Link to="/signup">
             <button className="btn btn-secondary rounded ms-2"> Sign Up</button>
