@@ -4,17 +4,21 @@ import logo from "../../images/GLogo.svg";
 import alternative from "../../images/alternative.png";
 import {
   useAuthState,
+  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Loading/Loading";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+  const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+
   const [signInWithaGoogle, user2, loading2, error2] =
     useSignInWithGoogle(auth);
   const [user1, loading1, error1] = useAuthState(auth);
@@ -28,6 +32,15 @@ const SignIn = () => {
 
   const handlePasswordBlur = (event) => {
     setPassword(event.target.value);
+  };
+
+  const resetPassword = async () => {
+    if (email) {
+      await sendPasswordResetEmail(email);
+      toast("Email Sent");
+    } else {
+      toast("Email is empty! Please provide ...");
+    }
   };
 
   const handleSubmit = (event) => {
@@ -80,7 +93,7 @@ const SignIn = () => {
         </div>
 
         <button type="submit" className="btn btn-secondary w-100">
-          Submit
+          Login
         </button>
       </form>
       {/* <img
@@ -89,6 +102,23 @@ const SignIn = () => {
         src={alternative}
         alt=""
       /> */}
+      <p className="text-center my-3">
+        Forget password ? Click
+        <button
+          className="btn-link border-0 rounded text-decoration-none"
+          onClick={resetPassword}
+        >
+          {" "}
+          Reset Password
+        </button>
+      </p>
+      <p className="text-center">
+        New User ? Please click
+        <Link className="ms-2 text-decoration-none" to="/signup">
+          Sign Up
+        </Link>
+      </p>
+
       <p className="text-center my-3 text-secondary">OR</p>
       <div>
         <div className="p-3">
@@ -101,12 +131,6 @@ const SignIn = () => {
           </button>
         </div>
         {signInErrorElement}
-        <p className="text-center">
-          New User ?
-          <Link to="/signup">
-            <button className="btn btn-secondary rounded ms-2"> Sign Up</button>
-          </Link>
-        </p>
       </div>
     </div>
   );
