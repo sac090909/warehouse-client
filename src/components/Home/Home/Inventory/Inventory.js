@@ -8,33 +8,6 @@ const Inventory = (props) => {
   const navigate = useNavigate();
   const handleInventoryItemNavigate = (id) => navigate(`/inventory/${id}`);
 
-  // const { id } = useParams();
-  // const [inventory, setInventory] = useState({});
-  // useEffect(() => {
-  //   fetch(`http://localhost:4001/inventory/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setInventory(data));
-  // }, [inventory]);
-
-  // const handleDelivered = () => {
-  //   if (inventory.quantity) {
-  //     const quantity = inventory.quantity - 1;
-
-  //     const updatedQuantity = { quantity };
-  //     fetch(`http://localhost:4001/inventory/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "content-type": "application/json",
-  //       },
-  //       body: JSON.stringify(updatedQuantity),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log("success", data);
-  //       });
-  //   }
-  // };
-
   return (
     <div>
       <div className="col h-100 shadow-sm bg-body rounded">
@@ -55,7 +28,7 @@ const Inventory = (props) => {
               onClick={() => handleInventoryItemNavigate(_id)}
               className="btn btn-secondary w-100"
             >
-              Update Stock
+              Update Inventory
             </button>
           </div>
         </div>

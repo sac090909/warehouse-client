@@ -3,15 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import useInventoryDetail from "../../hooks/useInventoryDetail";
 import useInventories from "../../hooks/userInventories";
 import ManageInventoryLink from "../../ManageInventroy/ManageInventoryLink/ManageInventoryLink";
-import RestockInventory from "../RestockInventory/RestockInventory";
+import { useForm } from "react-hook-form";
 
 const InventoryDetail = () => {
   const { id } = useParams();
-  let [inventory, setInventory] = useInventoryDetail(id);
-
+  const [inventory] = useInventoryDetail(id);
   const {
-    name,
     _id,
+    name,
     quantity,
     description,
     itemSold,
@@ -19,6 +18,7 @@ const InventoryDetail = () => {
     supplierName,
     picture,
   } = inventory;
+  const [restockQuantity, setRestockQuantity] = useState(0);
 
   const handleDelivered = (id) => {
     const quantity = parseInt(inventory.quantity) - 1;
@@ -32,9 +32,50 @@ const InventoryDetail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        //console.log("success", data);
+      });
+  };
+  // const handleQuantity = (event) => {
+  //   setRestockQuantity(event.target.value);
+  // };
+  // console.log(restockQuantity);
+
+  const handleRestock = (event, id) => {
+    event.preventDefault();
+
+    const quantity = parseInt(event.target.quantity.value);
+
+    const updatedQuantity = { quantity };
+    fetch(`http://localhost:4001/inventory/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedQuantity),
+    })
+      .then((res) => res.json())
+      .then((data) => {
         console.log("success", data);
       });
   };
+
+  // const { register, handleSubmit } = useForm();
+  // const onSubmit = (data) => {
+  //   console.log(data);
+  //   // const quantity = parseInt(data);
+  //   // const updatedQuantity = { quantity };
+  //   // fetch(`http://localhost:4001/inventory/${id}`, {
+  //   //   method: "PATCH",
+  //   //   headers: {
+  //   //     "content-type": "application/json",
+  //   //   },
+  //   //   body: JSON.stringify(updatedQuantity),
+  //   // })
+  //   //   .then((res) => res.json())
+  //   //   .then((data) => {
+  //   //     console.log("success", data);
+  //   //   });
+  // };
 
   return (
     <div>
@@ -57,7 +98,7 @@ const InventoryDetail = () => {
             <p className="card-text">Supplier: {supplierName}</p>
             <p className="card-text"> Description: {description}</p>
           </div>
-          <RestockInventory></RestockInventory>
+
           <button
             className="text-light bg-secondary"
             onClick={() => handleDelivered(_id)}
@@ -66,6 +107,27 @@ const InventoryDetail = () => {
           </button>
         </div>
       </div>
+
+      {/* <form
+        onSubmit={() => handleRestock(_id)}
+        className="w-50 mx-auto d-block my-5 border p-3 rounded-4 shadow-sm bg-body "
+      >
+        <h5 className="text-center text-secondary">Restock {name}</h5>
+        <div className="mb-3">
+          <input
+            type="number"
+            name="quantity"
+            className="form-control text-center"
+            aria-describedby="emailHelp"
+            placeholder="quantity"
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-secondary w-100">
+          Submit
+        </button>
+      </form> */}
+
       <ManageInventoryLink></ManageInventoryLink>
     </div>
   );

@@ -33,7 +33,7 @@ const AddNewItem = () => {
   return (
     <div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={() => handleSubmit()}
         className="w-50 mx-auto d-block my-5 border p-5 rounded-4 shadow-sm bg-body "
       >
         <h4 className="text-center text-secondary">Add New Item</h4>
