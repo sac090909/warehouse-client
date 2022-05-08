@@ -3,8 +3,10 @@ import { Table } from "react-bootstrap";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import useInventories from "../hooks/userInventories";
+import Loading from "../Loading/Loading";
 import AddItemLink from "../ManageInventroy/AddItemLink/AddItemLink";
 import ManageInventory from "../ManageInventroy/ManageInventory/ManageInventory";
+import ManageInventoryAll from "../ManageInventroy/ManageInventoryAll/ManageInventoryAll";
 import ManageMyInventory from "../ManageInventroy/ManageMyInvetory/ManageMyInventory";
 
 const MyItems = () => {
@@ -30,7 +32,7 @@ const MyItems = () => {
 
   return (
     <div>
-      <h4 className="text-center mt-5"> My Inventory [{user.email}]</h4>
+      <h4 className="text-center mt-5"> My Inventory [{user?.email}]</h4>
       <div className="mx-auto d-block px-5 mt-5">
         <Table responsive="lg">
           <thead>
@@ -46,18 +48,16 @@ const MyItems = () => {
             </tr>
           </thead>
           <tbody>
-            {inventories.map(
-              (inventory) =>
-                inventory?.user === user.email ? (
-                  <ManageMyInventory
-                    key={inventory._id}
-                    inventory={inventory}
-                    handleDeleteItem={handleDeleteItem}
-                  ></ManageMyInventory>
-                ) : (
-                  ""
-                )
-              //console.log(user.email, inventory?.user)
+            {inventories.map((inventory) =>
+              inventory?.user === user?.email ? (
+                <ManageMyInventory
+                  key={inventory._id}
+                  inventory={inventory}
+                  handleDeleteItem={handleDeleteItem}
+                ></ManageMyInventory>
+              ) : (
+                ""
+              )
             )}
           </tbody>
         </Table>

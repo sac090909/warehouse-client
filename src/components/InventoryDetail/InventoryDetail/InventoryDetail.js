@@ -7,22 +7,24 @@ import { useForm } from "react-hook-form";
 
 const InventoryDetail = () => {
   const { id } = useParams();
-  const [inventory] = useInventoryDetail(id);
-  const {
-    _id,
-    name,
-    quantity,
-    description,
-    itemSold,
-    price,
-    supplierName,
-    picture,
-  } = inventory;
+  const [inventory, setInventory] = useInventoryDetail(id);
+  // const {
+  //   _id,
+  //   name,
+  //   quantity,
+  //   description,
+  //   itemSold,
+  //   price,
+  //   supplierName,
+  //   picture,
+  // } = inventory;
   const [restockQuantity, setRestockQuantity] = useState(0);
 
-  const handleDelivered = (id) => {
+  const handleDelivered = (id, event) => {
+    //const {}
     const quantity = parseInt(inventory.quantity) - 1;
     const updatedQuantity = { quantity };
+
     fetch(`http://localhost:4001/inventory/${id}`, {
       method: "PUT",
       headers: {
@@ -32,7 +34,8 @@ const InventoryDetail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log("success", data);
+        console.log("success", data);
+        //window.location.reload();
       });
   };
   // const handleQuantity = (event) => {
@@ -82,26 +85,26 @@ const InventoryDetail = () => {
       <div className="col h-100 shadow-sm bg-body rounded w-50 mx-auto my-5">
         <div className="card h-100">
           <div className="card-title card-header bg-transparent text-center text-uppercase fw-bold">
-            {name}
+            {inventory.name}
           </div>
 
-          <img src={picture} className="card-img-top" alt="" />
+          <img src={inventory.picture} className="card-img-top" alt="" />
           <div className="card-body text-center h-100">
-            <p className="card-text">Item id: {_id}</p>
-            <p className="card-text">Price: {price}</p>
+            <p className="card-text">Item id: {inventory._id}</p>
+            <p className="card-text">Price: {inventory.price}</p>
             <p className="card-text text-light badge bg-secondary fs-5">
-              Quantity: {quantity}
+              Quantity: {inventory.quantity}
             </p>
 
-            <p className="card-text">Item Sold: {itemSold}</p>
+            <p className="card-text">Item Sold: {inventory.itemSold}</p>
 
-            <p className="card-text">Supplier: {supplierName}</p>
-            <p className="card-text"> Description: {description}</p>
+            <p className="card-text">Supplier: {inventory.supplierName}</p>
+            <p className="card-text"> Description: {inventory.description}</p>
           </div>
 
           <button
             className="text-light bg-secondary"
-            onClick={() => handleDelivered(_id)}
+            onClick={() => handleDelivered(inventory._id)}
           >
             Delivered
           </button>
