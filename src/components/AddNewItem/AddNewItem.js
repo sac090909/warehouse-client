@@ -2,9 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import useInventories from "../hooks/userInventories";
 
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { toast } from "react-toastify";
+
 const AddNewItem = () => {
   const [inventories, setInventories] = useInventories();
   const navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,6 +21,7 @@ const AddNewItem = () => {
       itemSold: parseInt(event.target.itemSold.value),
       supplierName: event.target.supplierName.value,
       description: event.target.description.value,
+      user: user.email,
     };
 
     fetch(`http://localhost:4001/inventory`, {
@@ -27,13 +33,14 @@ const AddNewItem = () => {
     })
       .then((res) => res.json())
       .then((result) => setInventories(result));
-    navigate("/manageinventory");
+    event.target.reset();
+    toast("Item Added!");
   };
 
   return (
     <div>
       <form
-        onSubmit={() => handleSubmit()}
+        onSubmit={handleSubmit}
         className="w-50 mx-auto d-block my-5 border p-5 rounded-4 shadow-sm bg-body "
       >
         <h4 className="text-center text-secondary">Add New Item</h4>
@@ -44,7 +51,7 @@ const AddNewItem = () => {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            placeholder="name"
+            placeholder="item name"
             required
           />
         </div>

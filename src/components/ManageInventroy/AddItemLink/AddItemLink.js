@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const AddItem = () => {
+const AddItemLink = () => {
   return (
     <div>
       <Link
@@ -14,4 +14,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem;
+export default AddItemLink;

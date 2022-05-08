@@ -25,6 +25,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
   const handleEmailBlur = (event) => {
     setEmail(event.target.value);
@@ -62,7 +63,7 @@ const SignIn = () => {
     );
   }
   if (user1) {
-    // navigate("/");
+    //navigate("/");
     navigate(from, { replace: true });
   }
   return (

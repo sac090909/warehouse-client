@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Inventory from "../../Home/Home/Inventory/Inventory";
-import useInventories from "../../hooks/userInventories";
-import AddItemLink from "../AddItemLink/AddItemLink";
-import AddItem from "../AddItemLink/AddItemLink";
-import ManageInventoryAll from "../ManageInventoryAll/ManageInventoryAll";
-import ManageMyInventory from "../ManageMyInvetory/ManageMyInventory";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import useInventories from "../hooks/userInventories";
+import AddItemLink from "../ManageInventroy/AddItemLink/AddItemLink";
+import ManageInventory from "../ManageInventroy/ManageInventory/ManageInventory";
+import ManageMyInventory from "../ManageInventroy/ManageMyInvetory/ManageMyInventory";
 
-const ManageInventory = () => {
+const MyItems = () => {
   const [inventories, setInventories] = useInventories();
+  const [user, loading, error] = useAuthState(auth);
 
   const handleDeleteItem = (id) => {
     const deleteConfirm = window.confirm("Are you sure to delete?");
@@ -30,10 +30,7 @@ const ManageInventory = () => {
 
   return (
     <div>
-      <h4 className="text-center mt-5">
-        {" "}
-        Total Inventory : {inventories.length}
-      </h4>
+      <h4 className="text-center mt-5"> My Inventory [{user.email}]</h4>
       <div className="mx-auto d-block px-5 mt-5">
         <Table responsive="lg">
           <thead>
@@ -49,13 +46,19 @@ const ManageInventory = () => {
             </tr>
           </thead>
           <tbody>
-            {inventories.map((inventory) => (
-              <ManageInventoryAll
-                key={inventory._id}
-                inventory={inventory}
-                handleDeleteItem={handleDeleteItem}
-              ></ManageInventoryAll>
-            ))}
+            {inventories.map(
+              (inventory) =>
+                inventory?.user === user.email ? (
+                  <ManageMyInventory
+                    key={inventory._id}
+                    inventory={inventory}
+                    handleDeleteItem={handleDeleteItem}
+                  ></ManageMyInventory>
+                ) : (
+                  ""
+                )
+              //console.log(user.email, inventory?.user)
+            )}
           </tbody>
         </Table>
       </div>
@@ -64,4 +67,4 @@ const ManageInventory = () => {
   );
 };
 
-export default ManageInventory;
+export default MyItems;
