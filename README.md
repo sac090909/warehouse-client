@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Project - Furniture Palace Warehose
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Furniture Palace Client Site Link
 
-## Available Scripts
+[Furniture Palace](https://furniture-warehouse-949eb.web.app)
 
-In the project directory, you can run:
+## Furniture Palace Server Site Link
 
-### `npm start`
+[Furniture Palace](https://fast-chamber-69071.herokuapp.com)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Code Repo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[https://github.com/ProgrammingHeroWC4/warehouse-management-client-side-drshaila2021](https://github.com/ProgrammingHeroWC4/warehouse-management-client-side-drshaila2021)
 
-### `npm test`
+[https://github.com/ProgrammingHeroWC4/warehouse-management-server-side-drshaila2021.git](https://github.com/ProgrammingHeroWC4/warehouse-management-server-side-drshaila2021.git)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## About the project
 
-### `npm run build`
+- The project is about Furniture Warehose management system.
+- Home page contains the banner and some inventory information along with other services offered.
+- Through update inventory detail of an item is provided which is a protected route
+- Through manage all inventories, all items has been displayed with an capability to delete items
+- Add item capabilty has also been provided
+- Blogs provides inform about some technogogy topics
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Technology
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- This is a SPA created with react.
+- create-react-app is used for initial project setup.
+- react-router is for route setup and protected route has been used.
+- Google firebase authentication platform has been for authentication. And the project provides email/password base and google provider for authentication.
+- react-firebase-hooks have been used for user creation, sign in methods.
+- Project client has been deplyed at Firebase platfrom.
+- Node express server has been used for server for CRUD opration
+- Mongobd has been used for database
