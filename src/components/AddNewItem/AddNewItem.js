@@ -21,7 +21,7 @@ const AddNewItem = () => {
       itemSold: parseInt(event.target.itemSold.value),
       supplierName: event.target.supplierName.value,
       description: event.target.description.value,
-      user: user.email,
+      user: user?.email,
     };
 
     fetch(`http://localhost:4001/inventory`, {

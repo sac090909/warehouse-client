@@ -11,6 +11,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Loading/Loading";
 import { toast } from "react-toastify";
+const axios = require("axios").default;
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -44,11 +45,13 @@ const SignIn = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    signInWithEmailAndPassword(email, password);
-    console.log(email, password);
-    console.log(error, error1);
+    await signInWithEmailAndPassword(email, password);
+    const { data } = await axios?.post("http://localhost:4001/login", {
+      email,
+    });
+    localStorage.setItem("accessToken", data.accessToken);
   };
   if (loading1) {
     return <Loading></Loading>;
@@ -63,7 +66,6 @@ const SignIn = () => {
     );
   }
   if (user1) {
-    //navigate("/");
     navigate(from, { replace: true });
   }
   return (

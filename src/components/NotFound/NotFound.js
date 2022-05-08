@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import notfound from "../../images/404page.jpg";
 

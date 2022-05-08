@@ -9,7 +9,7 @@ import SignIn from "./components/SignIn/SignIn";
 import AboutUs from "./components/AboutUs/AboutUs";
 
 import Home from "./components/Home/Home/Home/Home";
-import InventoryDetail from "./components/InventoryDetail/InventoryDetail/InventoryDetail";
+
 import ManageInventory from "./components/ManageInventroy/ManageInventory/ManageInventory";
 import AddNewItem from "./components/AddNewItem/AddNewItem";
 import Inventory from "./components/Home/Home/Inventory/Inventory";
@@ -20,6 +20,7 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyItems from "./components/MyItems/MyItems";
+import InventoryDetail from "./components/InventoryDetail/InventoryDetail";
 
 function App() {
   return (
